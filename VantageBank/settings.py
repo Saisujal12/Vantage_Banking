@@ -61,7 +61,7 @@ WSGI_APPLICATION = 'VantageBank.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'vantage_bank',
+        'NAME': BASE_DIR / 'db.sqlite3',
         'USER': 'root',
         'PASSWORD': 'BhagyaRamesh@143',
         'HOST': 'localhost',
