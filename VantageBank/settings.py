@@ -1,24 +1,15 @@
-"""
-Django settings for VantageBank project.
-"""
-
 from pathlib import Path
 import os
-import pymysql
 
-# MySQL fix
-pymysql.install_as_MySQLdb()
-
-# Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-temp-key')
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+SECRET_KEY = 'django-insecure-...'
+
+DEBUG = False   # ⚠️ IMPORTANT for production
+
 ALLOWED_HOSTS = ['*']
 
 
-# APPLICATIONS
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -26,14 +17,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'bankapp',
 ]
 
 
-# MIDDLEWARE
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ for Render
+    'whitenoise.middleware.WhiteNoiseMiddleware',   # ✅ REQUIRED
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -46,7 +37,6 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'VantageBank.urls'
 
 
-# TEMPLATES
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -67,56 +57,29 @@ TEMPLATES = [
 WSGI_APPLICATION = 'VantageBank.wsgi.application'
 
 
-# DATABASE (works for both local + Render)
+# DATABASE (keep your config)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('MYSQLDATABASE', 'vantage_bank'),
-        'USER': os.environ.get('MYSQLUSER', 'root'),
-        'PASSWORD': os.environ.get('MYSQLPASSWORD', 'BhagyaRamesh@143'),
-        'HOST': os.environ.get('MYSQLHOST', 'localhost'),
-        'PORT': os.environ.get('MYSQLPORT', '3306'),
+        'NAME': 'vantage_bank',
+        'USER': 'root',
+        'PASSWORD': 'BhagyaRamesh@143',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
 
-# PASSWORD VALIDATION
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
-
-# INTERNATIONALIZATION
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
-USE_I18N = True
-USE_TZ = True
-
-
 # STATIC FILES (IMPORTANT)
-STATIC_URL = '/static/'
+STATIC_URL = '/static/'   # ✅ FIXED
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "static",   # your css/js folder
 ]
 
-# Required for production (Render)
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / "staticfiles"   # where collectstatic stores files
 
-# WhiteNoise storage
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-# DEFAULT PRIMARY KEY
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
