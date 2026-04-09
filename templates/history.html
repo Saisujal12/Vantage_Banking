@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transaction History</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<header>
+<div class="logo">🏦 VANTAGE BANKING</div>
+<nav>
+<a href="{% url 'dashboard' %}">Home</a>
+<a href="#">About</a>
+<a href="#">Services</a>
+<a href="#">Contact Us</a>
+</nav>
+</header>
+
+<section class="hero">
+
+<div class="left">
+
+<h1>TRANSACTION HISTORY</h1>
+<p>Your recent banking activity.</p>
+
+<div style="margin-top:20px; overflow-x:auto;">
+
+{% if transactions %}
+<table border="1" cellpadding="10" style="background:white; width:100%; border-collapse:collapse;">
+<thead style="background:#007bff; color:white;">
+<tr>
+<th>Transaction ID</th>
+<th>From</th>
+<th>To</th>
+<th>Amount</th>
+<th>Date & Time</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+{% for txn in transactions %}
+<tr>
+<td>{{ txn.transaction_id }}</td>
+<td>{{ txn.sender.customer.name }}</td>
+<td>{{ txn.receiver.customer.name }}</td>
+<td>₹ {{ txn.amount }}</td>
+<td>{{ txn.timestamp }}</td>
+
+<td>
+{% if txn.sender == account %}
+<span style="color:red;">Sent</span>
+{% else %}
+<span style="color:green;">Received</span>
+{% endif %}
+</td>
+
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+{% else %}
+<p>No transactions yet.</p>
+{% endif %}
+
+</div>
+
+
+<br>
+<a href="{% url 'dashboard' %}" class="btn">⬅ Back to Dashboard</a>
+
+</div>
+
+<div class="right">
+<img src="https://images.unsplash.com/photo-1605902711622-cfb43c4437d1">
+</div>
+
+</section>
+
+<footer>
+<p>© 2026 Vantage Banking | Secure Digital Banking Platform</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vantage Banking - Home</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<header>
+<div class="logo">🏦 VANTAGE BANKING</div>
+
+<nav>
+<a href="{% url 'index' %}">Home</a>
+<a href="{% url 'index2' %}">About</a>
+<a href="#">Services</a>
+<a href="#">Contact Us</a>
+</nav>
+
+</header>
+
+<section class="hero">
+
+<!-- LEFT CONTENT -->
+<div class="left">
+
+<h1>WELCOME TO VANTAGE BANKING</h1>
+<p>Your Money, Clearly Defined.</p>
+
+<ul>
+<li>Smart Analytics: See where every dollar goes.</li>
+<li>High-Yield Growth: Watch your savings climb.</li>
+<li>Seamless Security: Industry-leading encryption.</li>
+</ul>
+
+<!-- OPEN ACCOUNT BUTTON -->
+<a href="{% url 'index3' %}" class="btn">OPEN ACCOUNT</a>
+
+<!-- LOGIN TEXT LINK -->
+<p style="margin-top:15px;">
+If already existed then 
+<a href="{% url 'login' %}" class="blink-login">Login</a>
+</p>
+
+</div>
+
+<!-- RIGHT IMAGE -->
+<div class="right">
+<img src="https://navi.com/blog/wp-content/uploads/2022/08/Mobile-Banking_1686w.jpg">
+</div>
+
+</section>
+
+<footer>
+<p>© 2026 Vantage Banking | Secure Digital Banking Platform</p>
+</footer>
+
+<script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>

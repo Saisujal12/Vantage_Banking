@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Transaction Successful</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+font-family:Arial, sans-serif;
+background:#f4f6f8;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+}
+
+.card{
+background:white;
+padding:40px;
+border-radius:12px;
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+text-align:center;
+width:90%;
+max-width:420px;
+}
+
+h1{
+color:green;
+margin-bottom:10px;
+}
+
+p{
+margin:8px 0;
+color:#555;
+}
+
+.count{
+color:#007bff;
+font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>✅ Transaction Successful</h1>
+
+<p><strong>Transaction ID:</strong> {{ txn_id }}</p>
+<p><strong>Amount:</strong> ₹ {{ amount }}</p>
+<p><strong>Date & Time:</strong> {{ time }}</p>
+
+<br>
+
+<p>Redirecting to dashboard in 
+<span id="countdown" class="count">5</span> seconds...</p>
+
+</div>
+
+<script>
+let seconds = 5;
+
+let timer = setInterval(function(){
+seconds--;
+document.getElementById("countdown").innerText = seconds;
+
+if(seconds <= 0){
+clearInterval(timer);
+window.location.href = "{% url 'dashboard' %}";
+}
+},1000);
+</script>
+
+</body>
+</html>

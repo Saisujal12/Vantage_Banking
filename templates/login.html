@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<header>
+<div class="logo">🏦 VANTAGE BANKING</div>
+<nav>
+<a href="{% url 'index' %}">Home</a>
+<a href="{% url 'index2' %}">About</a>
+</nav>
+</header>
+
+<section class="form-section">
+<h2>Login</h2>
+
+<form method="POST">
+{% csrf_token %}
+
+<input type="text" name="name" placeholder="Enter Name" required>
+<input type="password" name="password" placeholder="Password" required>
+
+<button type="submit">Login</button>
+
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
+
+</form>
+
+</section>
+
+</body>
+</html>

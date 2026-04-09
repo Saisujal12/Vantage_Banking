@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Delete Account - Vantage Banking</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#f4f6f8;
+}
+
+/* NAVBAR */
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#ffffff;
+padding:15px 30px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.logo{
+font-size:28px;
+font-weight:900;
+color:#0a2540;
+}
+
+/* MAIN */
+.container{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:50px;
+gap:40px;
+flex-wrap:wrap;
+}
+
+.left{
+flex:1;
+min-width:280px;
+}
+
+.left h1{
+color:red;
+font-size:30px;
+margin-bottom:20px;
+}
+
+.warning{
+font-size:18px;
+margin-bottom:25px;
+color:#333;
+}
+
+/* BUTTONS */
+.btn{
+padding:12px 20px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+margin-right:10px;
+}
+
+.delete-btn{
+background:red;
+color:white;
+}
+
+.cancel-btn{
+background:#007bff;
+color:white;
+text-decoration:none;
+display:inline-block;
+}
+
+.delete-btn:hover{
+background:darkred;
+}
+
+.cancel-btn:hover{
+background:#0056b3;
+}
+
+/* IMAGE */
+.right{
+flex:1;
+text-align:center;
+}
+
+.right img{
+width:100%;
+max-width:450px;
+border-radius:20px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+.container{
+flex-direction:column;
+text-align:center;
+padding:30px;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="logo">🏦 VANTAGE BANKING</div>
+</nav>
+
+<section class="container">
+
+<div class="left">
+
+<h1>⚠ Delete Account</h1>
+
+<div class="warning">
+Are you sure you want to permanently delete your bank account?<br><br>
+<b>This action cannot be undone.</b>
+</div>
+
+<form method="POST">
+{% csrf_token %}
+<button type="submit" class="btn delete-btn">
+Yes, Delete Permanently
+</button>
+</form>
+
+<br>
+
+<a href="{% url 'dashboard' %}" class="btn cancel-btn">
+Cancel & Go Back
+</a>
+
+</div>
+
+<div class="right">
+<img src="https://media.istockphoto.com/id/2184295789/photo/happy-businessman-shaking-hands-with-his-colleague-on-a-meeting-in-the-office.jpg?s=612x612&w=0&k=20&c=-LG_0zZW96OleFIWfjEP1ooidepWo0-kmaUny8mebXc=">
+</div>
+
+</section>
+
+</body>
+</html>

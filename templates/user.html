@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vantage Banking Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+/* ================= GLOBAL ================= */
+
+body{
+margin:0;
+font-family:'Segoe UI', Arial, sans-serif;
+background:linear-gradient(135deg,#eef2f7,#f8fbff);
+color:#333;
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#ffffff;
+padding:15px 40px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+font-size:22px;
+font-weight:700;
+color:#007bff;
+}
+
+.nav-links a{
+margin-left:25px;
+text-decoration:none;
+color:#444;
+font-weight:500;
+transition:0.3s;
+}
+
+.nav-links a:hover{
+color:#007bff;
+}
+
+/* ================= MAIN ================= */
+
+.container{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:60px 80px;
+gap:40px;
+flex-wrap:wrap;
+}
+
+.left{
+flex:1;
+min-width:280px;
+}
+
+.left h1{
+font-size:42px;
+margin-bottom:10px;
+color:#1a1a1a;
+}
+
+.left p{
+font-size:18px;
+color:#666;
+margin-bottom:25px;
+}
+
+/* ================= BUTTON ================= */
+
+.btn{
+padding:14px 22px;
+background:linear-gradient(45deg,#007bff,#0056d2);
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-size:16px;
+font-weight:600;
+box-shadow:0 6px 15px rgba(0,123,255,0.3);
+transition:0.3s;
+}
+
+.btn:hover{
+transform:translateY(-2px);
+box-shadow:0 10px 20px rgba(0,123,255,0.4);
+}
+
+/* ================= HOME MENU ================= */
+
+.home-menu{
+margin-top:25px;
+display:none;
+flex-direction:column;
+gap:12px;
+animation:fadeIn 0.4s ease-in-out;
+}
+
+.home-menu a{
+text-decoration:none;
+background:#ffffff;
+padding:14px;
+border-radius:12px;
+color:#333;
+font-weight:500;
+box-shadow:0 4px 10px rgba(0,0,0,0.06);
+transition:0.3s;
+}
+
+.home-menu a:hover{
+background:#007bff;
+color:white;
+transform:translateX(5px);
+}
+
+/* ================= RIGHT IMAGE ================= */
+
+.right{
+flex:1;
+text-align:center;
+}
+
+.right img{
+width:100%;
+max-width:500px;
+border-radius:20px;
+box-shadow:0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+margin-top:40px;
+text-align:center;
+padding:20px;
+background:#ffffff;
+box-shadow:0 -2px 8px rgba(0,0,0,0.05);
+font-size:14px;
+color:#666;
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(-10px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+.container{
+flex-direction:column;
+text-align:center;
+padding:30px;
+}
+
+.left h1{
+font-size:28px;
+}
+
+nav{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.nav-links{
+margin-top:10px;
+}
+
+.nav-links a{
+margin:8px 10px 0 0;
+display:inline-block;
+}
+
+
+}
+/* ===== ALERT MESSAGE ===== */
+
+.alert{
+padding:12px 18px;
+margin:15px 0;
+border-radius:10px;
+color:white;
+font-weight:500;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+animation:fadeIn 0.5s ease-in-out;
+transition:opacity 0.5s ease;
+}
+
+/* SUCCESS = GREEN */
+.alert.success{
+background:linear-gradient(45deg,#28a745,#218838);
+}
+
+/* ERROR = RED */
+.alert.error{
+background:linear-gradient(45deg,#dc3545,#b02a37);
+}
+.success-alert{
+background:linear-gradient(45deg,#28a745,#218838);
+color:white;
+padding:12px 18px;
+margin:15px 0;
+border-radius:10px;
+font-weight:500;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+animation:fadeIn 0.5s ease-in-out;
+transition:opacity 0.5s ease;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+<div class="logo">🏦 VANTAGE BANKING</div>
+
+<div class="nav-links">
+
+<a href="{% url 'dashboard' %}">Home</a>
+<a href="{% url 'transfer' %}">Transfer</a>
+<a href="#">Loans</a>
+<a href="#">Cards</a>
+<a href="{% url 'verify' %}">Account</a>
+
+<a href="{% url 'logout' %}"
+onclick="return confirm('Are you sure you want to logout?');">
+Logout
+</a>
+
+</div>
+
+</nav>
+
+<!-- ================= MAIN ================= -->
+
+<section class="container">
+
+<div class="left">
+
+<h1>WELCOME MR. {{ user.name|upper }}</h1>
+{% if txn_success %}
+<div id="successMsg" class="success-alert">
+    ✅ Transaction Successful
+</div>
+{% endif %}
+
+
+
+<p>Your Money, Clearly Defined.</p>
+
+<button onclick="toggleMenu()" class="btn">
+Dashboard Options
+</button>
+
+<div id="homeMenu" class="home-menu">
+
+<a href="{% url 'balance' %}">💰 Current Balance</a>
+<a href="{% url 'history' %}">📜 Transaction History</a>
+<a href="{% url 'transfer' %}">💳 Make Transaction</a>
+<a href="#">🎁 Your Rewards</a>
+<a href="{% url 'verify' %}">👤 Your Account</a>
+
+<a href="{% url 'delete' %}"
+onclick="return confirm('⚠ Are you sure you want to permanently delete your bank account? This action cannot be undone.');">
+❌ Delete Account
+</a>
+
+<a href="{% url 'logout' %}"
+onclick="return confirm('Are you sure you want to logout?');">
+🚪 Logout
+</a>
+
+</div>
+
+</div>
+
+<div class="right">
+
+<img src="https://media.istockphoto.com/id/2184295789/photo/happy-businessman-shaking-hands-with-his-colleague-on-a-meeting-in-the-office.jpg?s=612x612&w=0&k=20&c=-LG_0zZW96OleFIWfjEP1ooidepWo0-kmaUny8mebXc=">
+
+</div>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+© 2026 Vantage Banking | Secure Digital Banking Platform
+</footer>
+
+<script>
+
+function toggleMenu(){
+let menu = document.getElementById("homeMenu");
+
+if(menu.style.display === "flex"){
+menu.style.display = "none";
+}else{
+menu.style.display = "flex";
+}
+
+}
+
+</script>
+<script>
+setTimeout(function(){
+let msg = document.getElementById("successMsg");
+if(msg){
+msg.style.opacity = "0";
+setTimeout(function(){
+msg.style.display = "none";
+},500);
+}
+},5000); // 5 seconds
+</script>
+
+
+
+</body>
+</html>

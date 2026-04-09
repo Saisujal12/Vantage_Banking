@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Current Balance</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<header>
+<div class="logo">🏦 VANTAGE BANKING</div>
+<nav>
+<a href="{% url 'dashboard' %}">Home</a>
+<a href="#">About</a>
+<a href="#">Services</a>
+<a href="#">Contact Us</a>
+</nav>
+</header>
+
+<section class="hero">
+
+<div class="left">
+
+<h1>YOUR CURRENT BALANCE</h1>
+<p>Your Money, Clearly Defined.</p>
+
+<h2 style="margin-top:20px;">₹ {{ account.balance }}</h2>
+
+<br>
+<a href="{% url 'dashboard' %}" class="btn">⬅ Back to Dashboard</a>
+
+</div>
+
+<div class="right">
+<img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b">
+</div>
+
+</section>
+
+<footer>
+<p>© 2026 Vantage Banking | Secure Digital Banking Platform</p>
+</footer>
+
+</body>
+</html>

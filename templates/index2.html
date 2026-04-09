@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - Vantage Banking</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<header>
+<div class="logo">🏦 VANTAGE BANKING</div>
+<nav>
+<a href="{% url 'index' %}">Home</a>
+<a href="{% url 'index2' %}">About</a>
+<a href="#">Services</a>
+<a href="#">Contact Us</a>
+</nav>
+</header>
+
+<section class="content">
+<h2>About Vantage Banking</h2>
+
+<p>
+Vantage Banking is a secure digital banking simulation platform built using
+HTML, CSS, JavaScript, Django and MySQL. It provides modern financial
+services like account management, transaction history, rewards, and loans.
+</p>
+
+<p>
+Our system focuses on secure banking operations, user-friendly interfaces,
+and efficient data management.
+</p>
+</section>
+
+<footer>
+<p>© 2026 Vantage Banking</p>
+</footer>
+
+</body>
+</html>

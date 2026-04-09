@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<header>
+<div class="logo">🏦 VANTAGE BANKING</div>
+<nav>
+<a href="{% url 'index' %}">Home</a>
+<a href="{% url 'index2' %}">About</a>
+<a href="#">Services</a>
+<a href="#">Contact Us</a>
+</nav>
+</header>
+
+<section class="form-section">
+
+<h2>Create Bank Account</h2>
+
+<form method="POST" action="/create/">
+    {% csrf_token %}
+
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="text" name="address" placeholder="Address" required>
+    <input type="text" name="mobile" placeholder="Mobile Number" required>
+    <input type="email" name="email" placeholder="Email" required>
+
+    <button type="submit">Create Account</button>
+</form>
+
+
+
+<p id="msg"></p>
+
+</section>
+
+<footer>
+<p>© 2026 Vantage Banking</p>
+</footer>
+
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

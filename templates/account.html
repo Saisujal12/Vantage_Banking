@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Your Account - Vantage Banking</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#f4f6f8;
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#ffffff;
+padding:15px 30px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+flex-wrap:wrap;
+}
+
+.logo{
+font-size:28px;
+font-weight:900;
+color:#0a2540;
+}
+
+.nav-links a{
+margin-left:20px;
+text-decoration:none;
+color:black;
+font-weight:500;
+}
+
+.nav-links a:hover{
+color:#007bff;
+}
+
+/* ================= MAIN SECTION ================= */
+
+.container{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:50px;
+gap:40px;
+flex-wrap:wrap;
+}
+
+.left{
+flex:1;
+min-width:280px;
+}
+
+.left h1{
+font-size:32px;
+margin-bottom:20px;
+color:#0a2540;
+}
+
+.info{
+margin:12px 0;
+font-size:18px;
+color:#333;
+}
+
+.right{
+flex:1;
+text-align:center;
+}
+
+.right img{
+width:100%;
+max-width:500px;
+border-radius:20px;
+}
+
+/* ================= BUTTON ================= */
+
+.btn{
+margin-top:30px;
+padding:12px 20px;
+background:#007bff;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+text-decoration:none;
+display:inline-block;
+}
+
+.btn:hover{
+background:#0056b3;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+.container{
+flex-direction:column;
+text-align:center;
+padding:30px;
+}
+
+nav{
+flex-direction:column;
+align-items:flex-start;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+<div class="logo">🏦 VANTAGE BANKING</div>
+
+<div class="nav-links">
+<a href="{% url 'dashboard' %}">Dashboard</a>
+<a href="{% url 'logout' %}">Logout</a>
+</div>
+
+</nav>
+
+<!-- ================= CONTENT ================= -->
+
+<section class="container">
+
+<div class="left">
+
+<h1>Your Account Details</h1>
+
+<div class="info"><b>Account Number:</b> {{ account.account_number }}</div>
+
+<div class="info"><b>User Name:</b> {{ user.name }}</div>
+
+<div class="info">
+<b>Password (Last 3 chars):</b>
+{{ user.password|slice:"-3:" }}
+</div>
+
+<div class="info"><b>Email:</b> {{ user.email }}</div>
+<div class="info"><b>Mobile:</b> {{ user.mobile }}</div>
+<div class="info"><b>Address:</b> {{ user.address }}</div>
+
+<div class="info">
+<b>Bank Balance:</b> ₹ {{ account.balance }}
+</div>
+
+<!-- ✅ BACK BUTTON -->
+<a href="{% url 'dashboard' %}" class="btn">
+⬅ Go Back to Dashboard
+</a>
+
+</div>
+
+<div class="right">
+
+<img src="https://media.istockphoto.com/id/2184295789/photo/happy-businessman-shaking-hands-with-his-colleague-on-a-meeting-in-the-office.jpg?s=612x612&w=0&k=20&c=-LG_0zZW96OleFIWfjEP1ooidepWo0-kmaUny8mebXc=">
+
+</div>
+
+</section>
+
+</body>
+</html>
